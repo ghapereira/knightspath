@@ -1,9 +1,9 @@
 CC=gcc
-SOURCES=main.c lib.c
+SOURCES=src/main.c src/lib.c
 BIN=bin/main
 FLAGS=-O2 -Wall
 
-TEST_SOURCES=tests.c lib.c
+TEST_SOURCES=src/tests.c src/lib.c
 TEST_BIN=bin/test
 
 all:
@@ -24,4 +24,4 @@ build: all checks
 
 .PHONY: clean
 clean:
-	rm -rf $(BIN)
+	rm -rf bin/*
