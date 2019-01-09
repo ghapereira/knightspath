@@ -8,8 +8,11 @@
 
 #include "definitions.h"
 #include "lib.h"
+#include "minunit.h"
 
 uint16_t tests_run = 0;
+uint16_t tests_ok = 0;
+uint16_t tests_fail = 0;
 
 static char * test_allocate_board() {
     KPBoard board = NULL;
@@ -41,10 +44,9 @@ static char * test_board_initialization() {
     KPSquare initialPosition = board[INITIAL_POSITION_X][INITIAL_POSITION_Y];
 
     mu_assert("error, knight not at starting position", initialPosition == visited);
-
     for (uint16_t i = 0; i < BOARD_WIDTH; i++) {
         for (uint16_t j = 0; i < BOARD_HEIGHT; i++) {
-            bool isInitialPosition = i == INITIAL_POSITION_X && j == INITIAL_POSITION_Y;
+            bool isInitialPosition = (i == INITIAL_POSITION_X) && (j == INITIAL_POSITION_Y);
             if (isInitialPosition) {
                 break;
             }
@@ -57,9 +59,22 @@ static char * test_board_initialization() {
     return 0;
 }
 
+static char * test_valid_position_is_correct() {
+    mu_assert("error, valid position shown as invalid", KPisValidPosition(0, 0));
+    return 0;
+}
+
+static char * test_position_lesser_than_0_should_be_invalid() {
+    mu_assert("error, invalid position shown as valid", !KPisValidPosition(-1, -1));
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_allocate_board);
     mu_run_test(test_set_all_board_squares);
+    mu_run_test(test_board_initialization);
+    mu_run_test(test_valid_position_is_correct);
+    mu_run_test(test_position_lesser_than_0_should_be_invalid);
     return 0;
 }
 
@@ -68,11 +83,12 @@ int main(int argc, char * argv[]) {
     if (result != 0) {
         print_error(result);
     } else {
-        // printf("ALL TESTS PASSED\n");
         print_success("ALL TESTS PASSED");
     }
 
     printf("Tests run: %d\n", tests_run);
+    printf("Tests ok: %d\n", tests_ok);
+    printf("Tests fail: %d\n", tests_fail);
 
     return result != 0;
 }

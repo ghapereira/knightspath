@@ -12,10 +12,12 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "minunit.h"
 
 #define BOARD_WIDTH 8
 #define BOARD_HEIGHT 8
+
+#define INITIAL_POSITION_X 0
+#define INITIAL_POSITION_Y 0
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"

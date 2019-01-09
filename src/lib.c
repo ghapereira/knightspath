@@ -36,3 +36,18 @@ void KPfreeBoard(KPBoard board) {
 
     free(board);
 }
+
+// Assuming board is already allocated
+void KPinitializeBoard(KPBoard board) {
+    for(uint16_t i = 0; i < BOARD_WIDTH; i++) {
+        for(uint16_t j = 0; j < BOARD_HEIGHT; j++) {
+            board[i][j] = nonvisited;
+        }
+    }
+
+    board[INITIAL_POSITION_X][INITIAL_POSITION_Y] = visited;
+}
+
+bool KPisValidPosition(uint16_t x, uint16_t y) {
+    return x >= 0 && y >= 0 && x < BOARD_WIDTH && y < BOARD_HEIGHT;;
+}

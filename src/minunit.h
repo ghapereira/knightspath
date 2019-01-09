@@ -8,4 +8,9 @@
 /*****************************************************************************/
  #define mu_assert(message, test) do { if (!(test)) return message; } while (0)
  #define mu_run_test(test) do { char *message = test(); tests_run++; \
-                                if (message) return message; } while (0)
+                                if (message) { tests_fail++ ; return message; } \
+                                else { tests_ok++ ;  } } while (0)
+
+extern uint16_t tests_run;
+extern uint16_t tests_ok;
+extern uint16_t tests_fail;
