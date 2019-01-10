@@ -69,12 +69,56 @@ static char * test_position_lesser_than_0_should_be_invalid() {
     return 0;
 }
 
+static char * test_position_X_above_max_should_be_invalid() {
+    mu_assert("error, board position X above max", !KPisValidPosition(BOARD_WIDTH, 0));
+    return 0;
+}
+
+static char * test_position_Y_above_max_should_be_invalid() {
+    mu_assert("error, board position Y above max", !KPisValidPosition(0, BOARD_HEIGHT));
+    return 0;
+}
+
+static char * test_position_above_max_should_be_invalid() {
+    mu_assert("error, board position above max",
+              !KPisValidPosition(BOARD_WIDTH, BOARD_HEIGHT));
+    return 0;
+}
+
+static char * test_fail_condition_cannot_backtrack_more() {
+    KPGameStructure game = KPinitializeGame();
+    KPbacktrack(&game);
+    mu_assert("error, should not be able to backtrack again", game.currentPosition == -1);
+    return 0;
+}
+
+static char * test_initialize_game() {
+    KPGameStructure game = KPinitializeGame();
+    mu_assert("error, game not initialized", game.movementList[0] == movementA);
+    mu_assert("error, game not initialized", game.currentPosition == 0);
+    // TODO clean game
+    return 0;
+}
+
+static char * test_first_movement_is_D() {
+    KPGameStructure game = KPinitializeGame();
+    KPtakeMove(&game);
+    mu_assert("error, first movement wrong", game.movementList[1] == movementD);
+    mu_assert("error, wrong position", game.currentPosition == 1);
+}
+
 static char * all_tests() {
     mu_run_test(test_allocate_board);
     mu_run_test(test_set_all_board_squares);
     mu_run_test(test_board_initialization);
     mu_run_test(test_valid_position_is_correct);
     mu_run_test(test_position_lesser_than_0_should_be_invalid);
+    mu_run_test(test_position_above_max_should_be_invalid);
+    mu_run_test(test_position_X_above_max_should_be_invalid);
+    mu_run_test(test_position_Y_above_max_should_be_invalid);
+    mu_run_test(test_fail_condition_cannot_backtrack_more);
+    mu_run_test(test_initialize_game);
+    mu_run_test(test_first_movement_is_D);
     return 0;
 }
 

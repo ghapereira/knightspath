@@ -51,3 +51,23 @@ void KPinitializeBoard(KPBoard board) {
 bool KPisValidPosition(uint16_t x, uint16_t y) {
     return x >= 0 && y >= 0 && x < BOARD_WIDTH && y < BOARD_HEIGHT;;
 }
+
+int16_t KPnextMove() {
+    return -1;
+}
+
+KPGameStructure KPinitializeGame() {
+    KPGameStructure game;
+    game.board = KPallocateBoard();
+    KPinitializeBoard(game.board);
+    game.movementList = (KPMovement *)calloc(BOARD_HEIGHT * BOARD_WIDTH, sizeof(KPMovement));
+
+    game.currentPosition = 0;
+    game.movementList[game.currentPosition] = movementA;
+
+    return game;
+}
+
+void KPbacktrack(KPGameStructure * game) {
+    game->currentPosition = -1;
+}

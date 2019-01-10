@@ -12,3 +12,6 @@ KPBoard KPallocateBoard();
 void KPfreeBoard(KPBoard board);
 void KPinitializeBoard(KPBoard board);
 bool KPisValidPosition(uint16_t x, uint16_t y);
+int16_t KPnextMove();
+KPGameStructure KPinitializeGame();
+void KPbacktrack(KPGameStructure * game);

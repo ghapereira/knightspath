@@ -40,4 +40,25 @@ typedef KPSquareStatus KPSquare;
 typedef KPSquare* KPLine;
 typedef KPSquare** KPBoard;
 
+// Represents possible movements
+typedef enum KPMovement {
+    movementA,
+    movementB,
+    movementC,
+    movementD,
+    movementE,
+    movementF,
+    movementG,
+    movementH,
+    invalidMovement
+} KPMovement;
+
+// Represents the game instance
+typedef struct KPGameStructure {
+    KPBoard board;
+    KPMovement * movementList;
+    // Represents the current position on the movementList
+    int16_t currentPosition;
+} KPGameStructure;
+
 #endif // __DEFINITIONS__
