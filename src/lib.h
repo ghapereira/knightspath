@@ -15,3 +15,5 @@ bool KPisValidPosition(uint16_t x, uint16_t y);
 int16_t KPnextMove();
 KPGameStructure KPinitializeGame();
 void KPbacktrack(KPGameStructure * game);
+KPGameState KPmakeMove(KPGameStructure * game);
+void KPcleanGame(KPGameStructure * game);

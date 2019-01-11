@@ -53,12 +53,25 @@ typedef enum KPMovement {
     invalidMovement
 } KPMovement;
 
+typedef struct KPCoordinates {
+    uint16_t x;
+    uint16_t y;
+} KPCoordinates;
+
 // Represents the game instance
 typedef struct KPGameStructure {
     KPBoard board;
     KPMovement * movementList;
     // Represents the current position on the movementList
     int16_t currentPosition;
+    // Represents the current Knight's coordinates on the game board
+    KPCoordinates currentCoordinates;
 } KPGameStructure;
+
+typedef enum KPGameState {
+    gameCompleted,
+    gameInfeasible,
+    gameContinues
+} KPGameState;
 
 #endif // __DEFINITIONS__

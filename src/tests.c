@@ -96,15 +96,16 @@ static char * test_initialize_game() {
     KPGameStructure game = KPinitializeGame();
     mu_assert("error, game not initialized", game.movementList[0] == movementA);
     mu_assert("error, game not initialized", game.currentPosition == 0);
-    // TODO clean game
+    KPcleanGame(&game);
     return 0;
 }
 
 static char * test_first_movement_is_D() {
     KPGameStructure game = KPinitializeGame();
-    KPtakeMove(&game);
+    KPmakeMove(&game);
     mu_assert("error, first movement wrong", game.movementList[1] == movementD);
     mu_assert("error, wrong position", game.currentPosition == 1);
+    return 0;
 }
 
 static char * all_tests() {
