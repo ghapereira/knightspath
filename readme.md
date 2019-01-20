@@ -40,3 +40,10 @@ needing to repeat a square. Condition 2 means it was impossible to do it.
 Programwise, condition 1 is checked simply when the movement array is fully covered, and
 condition 2 when in the first position the program tries to go to a movement after 'H'.
 
+### Build instructions
+
+The program can be built by using `make`. Alternatively it can be built by using Docker.
+Currently the only thing that works are the tests, that are the default operation
+specified in the Dockerfile. The execution is as follows:
+`docker build -t knightspath .`
+

@@ -48,12 +48,13 @@ void KPinitializeBoard(KPBoard board) {
     board[INITIAL_POSITION_X][INITIAL_POSITION_Y] = visited;
 }
 
-bool KPisValidPosition(uint16_t x, uint16_t y) {
-    return x >= 0 && y >= 0 && x < BOARD_WIDTH && y < BOARD_HEIGHT;;
+bool KPisValidPosition(KPCoordinates coordinates) {
+    return coordinates.x >= 0 && coordinates.y >= 0
+        && coordinates.x < BOARD_WIDTH && coordinates.y < BOARD_HEIGHT;
 }
 
-int16_t KPnextMove() {
-    return -1;
+KPMovement KPnextMove(KPMovement currentMove) {
+    return movementA;
 }
 
 static void KPinitializeCoordinates(KPCoordinates * coordinates, uint16_t x, uint16_t y) {
@@ -84,12 +85,30 @@ void KPbacktrack(KPGameStructure * game) {
 }
 
 KPGameState KPmakeMove(KPGameStructure * game) {
-    // find where we are
-    // if the next movement is viable (as marked in the current position), do it
-    // while (KPupdateMovement)
-    // if not, can we update?
-    //  if yes, update
-    //  if no, return game infeasible
-    // try to make the next move
+    /*
+    KPMovement currentMovement = game->movementList[game->currentPosition];
+    KPCoordinates nextCoordinates;
+
+    while(currentMovement != invalidMovement) {
+        nextCoordinates = KPgetNextCoordinates(currentMovement, &game);
+        bool isPositionValid = KPisValidPosition(nextCoordinates);
+        bool isPositionUnvisited = KPisPositionUnvisited(nextCoordinates, &game);
+
+        if (isPositionValid && isPositionUnvisited) {
+            game->currentPosition++;
+            if (game->currentPosition == BOARD_SIZE - 1) {
+                return gameCompleted;
+            }
+
+            // Game still continues
+            return gameContinues;
+        }
+
+        // update current movement
+    }
+    */
+
+    // return current state
+
     return gameInfeasible;
 }
